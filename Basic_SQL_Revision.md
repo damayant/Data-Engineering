@@ -20,6 +20,49 @@ Preparing for SQL interviews involves mastering a range of topics, from basic qu
      ```sql
      SELECT first_name, last_name FROM employees ORDER BY last_name ASC;
      ```
+     The SQL query you provided is used to count the number of employees in each department. Let's break it down:
+
+### **Query Explanation:**
+- **`SELECT department, COUNT(*) as num_employees`:** This part of the query selects the department name and counts the number of rows (i.e., employees) in each department. The count is labeled as `num_employees`.
+- **`FROM employees`:** Specifies the table from which to retrieve the data, in this case, the `employees` table.
+- **`GROUP BY department`:** Groups the results by the `department` column. This means that the `COUNT(*)` function will be applied to each group (i.e., department) separately.
+
+### **Example with Data:**
+
+Assume you have the following `employees` table:
+
+| employee_id | first_name | last_name | department   |
+|-------------|------------|-----------|--------------|
+| 1           | Alice      | Johnson   | Sales        |
+| 2           | Bob        | Smith     | Engineering  |
+| 3           | Charlie    | Brown     | Sales        |
+| 4           | David      | Wilson    | Engineering  |
+| 5           | Eve        | Davis     | Marketing    |
+| 6           | Frank      | Miller    | Sales        |
+
+### **Result of the Query:**
+When you run the query:
+
+```sql
+SELECT department, COUNT(*) as num_employees 
+FROM employees 
+GROUP BY department;
+```
+
+You will get the following result:
+
+| department   | num_employees |
+|--------------|---------------|
+| Sales        | 3             |
+| Engineering  | 2             |
+| Marketing    | 1             |
+
+### **Explanation of the Result:**
+- The `Sales` department has 3 employees (Alice, Charlie, Frank).
+- The `Engineering` department has 2 employees (Bob, David).
+- The `Marketing` department has 1 employee (Eve).
+
+This query is useful when you need to summarize data, such as finding out how many employees are in each department within a company.
 
 ### 4. **JOIN Operations**
    - **Concept:** Combine rows from two or more tables based on a related column.
