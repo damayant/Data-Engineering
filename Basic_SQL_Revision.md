@@ -180,7 +180,62 @@ This query is useful when you need to summarize data, such as finding out how ma
        WHERE department = dept_name;
      END;
      ```
+The SQL code provided creates a stored procedure named `GetEmployeeCountByDept`. This stored procedure takes an input parameter `dept_name` of type `VARCHAR(255)`. The procedure's purpose is to count the number of employees in a specified department and return the count.
 
+### How It Works:
+1. **Input Parameter:** 
+   - `dept_name`: This is the department name you want to count employees for.
+  
+2. **Query Execution:** 
+   - The procedure runs a `SELECT` statement that counts the number of employees (`COUNT(*)`) in the `employees` table where the `department` column matches the provided `dept_name`.
+
+3. **Output:** 
+   - The procedure returns the number of employees in the specified department as `num_employees`.
+
+### Example with Data:
+
+#### Sample Data in `employees` Table:
+
+| employee_id | first_name | last_name | department    | salary |
+|-------------|------------|-----------|---------------|--------|
+| 1           | Alice      | Johnson   | Engineering   | 80000  |
+| 2           | Bob        | Smith     | Sales         | 60000  |
+| 3           | Charlie    | Davis     | Engineering   | 85000  |
+| 4           | David      | Williams  | Sales         | 70000  |
+| 5           | Eve        | Brown     | Marketing     | 75000  |
+
+#### Example Usage:
+
+Let's say you want to count the number of employees in the "Engineering" department.
+
+```sql
+CALL GetEmployeeCountByDept('Engineering');
+```
+
+### What Happens:
+1. The procedure is called with `'Engineering'` as the `dept_name`.
+2. The `SELECT` query inside the procedure is executed:
+   ```sql
+   SELECT COUNT(*) as num_employees 
+   FROM employees 
+   WHERE department = 'Engineering';
+   ```
+3. The query counts the rows where the `department` is `'Engineering'`.
+
+### Result:
+
+The query will return:
+```sql
+| num_employees |
+|---------------|
+| 2             |
+```
+
+This means there are 2 employees in the "Engineering" department (Alice Johnson and Charlie Davis).
+
+### Explanation:
+- The `GetEmployeeCountByDept` procedure dynamically counts the number of employees based on the department name you pass as an argument.
+- You can reuse this procedure for any department by simply calling it with different department names. For example, calling `CALL GetEmployeeCountByDept('Sales');` would return `2` since there are two employees in the "Sales" department.
 ### 16. **Transactions**
    - **Concept:** Ensure a sequence of operations is completed successfully.
    - **Example:**
